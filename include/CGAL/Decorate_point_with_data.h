@@ -17,17 +17,23 @@ namespace CGAL {
      * Decorated point 2
      */
     template < typename OldKernel, typename DataType >
-    class Point_2_with_data : public OldKernel::Point_2 {
+    class Point_2_with_data : private OldKernel::Point_2 {
     public:
         typedef typename OldKernel::Point_2 Old_point_2 ;
+        typedef typename OldKernel::RT   RT ;
+        typedef typename OldKernel::FT   FT ;
         
         using Old_point_2::Old_point_2;
+        
+        using Old_point_2::x;
+        using Old_point_2::y;
 
         DataType & data() { return _data ; }
         const DataType & data() const { return _data ; }
     private:
         DataType         _data ;
     } ;
+
 
     // Adapter from cgal/Arrangement_on_surface_2/test/Arrangement_on_surface_2/ex_kernel_point.cpp
     template <typename K, typename OldK> 
@@ -42,22 +48,28 @@ namespace CGAL {
         // Note : the CGAL::Return_base_tag is really internal CGAL stuff.
         // Unfortunately it is needed for optimizing away copy-constructions,
         // due to current lack of delegating constructors in the C++ standard.
-        Rep operator()(CGAL::Return_base_tag, CGAL::Origin o) const
+        Rep // Point_2
+        operator()(CGAL::Return_base_tag, CGAL::Origin o) const
         { return Rep(o); }
 
-        Rep operator()(CGAL::Return_base_tag, const RT& x, const RT& y) const
+        Rep // Point_2
+        operator()(CGAL::Return_base_tag, const RT& x, const RT& y) const
         { return Rep(x, y); }
 
-        Rep operator()(CGAL::Return_base_tag, const RT& x, const RT& y, const RT& w) const
+        Rep // Point_2
+        operator()(CGAL::Return_base_tag, const RT& x, const RT& y, const RT& w) const
         { return Rep(x, y, w); }
 
         // End of hell
 
         Point_2 operator()(CGAL::Origin o) const
-        { return result_type(0, 0, 0); }
-
+        { return result_type(0,0,0); }
+    
+        
         Point_2 operator()(const RT & x, const RT & y) const
-        { return result_type(x, y, 0); }
+        { 
+            return result_type(x, y, 1); // TODO fix why 0 in the example
+        }
 
         Point_2 operator()(const Line_2 & l) const
         {
