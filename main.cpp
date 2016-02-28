@@ -1,6 +1,5 @@
 #include <iostream>
 
-
 #include <CGAL/Simple_cartesian.h>
 #include <CGAL/Exact_predicates_exact_constructions_kernel.h>
 #include <CGAL/Exact_predicates_inexact_constructions_kernel.h>
@@ -12,8 +11,8 @@ typedef CGAL::Exact_predicates_exact_constructions_kernel Epeck ;
 typedef CGAL::Exact_predicates_exact_constructions_kernel Epick ;
 
 typedef CGAL::Decorate_point_with_data< Cartesian::FT, double > CartesianM;
-typedef CGAL::Decorate_point_with_data< Epeck::FT, double > EpeckM;
-typedef CGAL::Decorate_point_with_data< Epick::FT, double > EpickM;
+typedef CGAL::Decorate_point_with_data< Epeck::FT, double >     EpeckM;
+typedef CGAL::Decorate_point_with_data< Epick::FT, double >     EpickM;
 
 //typedef CGAL::Decorate_point_with_data< Epick, double > EpickM;
 

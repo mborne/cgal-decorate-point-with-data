@@ -1,3 +1,11 @@
+/*
+ * WARNING : 
+ * - This file is not (yet?) part of CGAL library.
+ * - The code is not clean enougth to be use in production
+ * 
+ * @author Mickaël BORNE (IGN France) 2016
+ * Licence LGPL
+ */
 #ifndef CGAL_DECORATE_POINT_WITH_DATA_H_
 #define CGAL_DECORATE_POINT_WITH_DATA_H_
 
@@ -21,9 +29,7 @@ namespace CGAL {
         DataType         _data ;
     } ;
 
-    
-
-
+    // Adapter from cgal/Arrangement_on_surface_2/test/Arrangement_on_surface_2/ex_kernel_point.cpp
     template <typename K, typename OldK> 
     class Construct_point_2_with_data {
         typedef typename K::RT              RT;
@@ -100,21 +106,6 @@ namespace CGAL {
             typedef Decorate_point_with_data_base<Kernel2, Kernel_base, UserData> Type; 
         };
     };
-    
-    
-    /**
-     * Defines the new kernel
-    
-    template < typename OldKernel, typename UserData>
-    struct Decorate_point_with_data : public CGAL::Type_equality_wrapper<
-        Decorate_point_with_data_base<
-            Decorate_point_with_data<OldKernel,UserData>, 
-            OldKernel,
-            UserData
-        >,
-        Decorate_point_with_data<OldKernel,UserData> 
-    >{};
-    */
     
     
     /*! The extended Kernel type */
